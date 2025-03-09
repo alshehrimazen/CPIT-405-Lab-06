@@ -8,15 +8,23 @@ const submitBtn = document.getElementById("submit");
 const clearBtn = document.getElementById("clear");
 const commentsList = document.getElementById("commentsList");
 
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.cookie.includes("voted=true")) {
+    disableButtons();
+  }
+});
+
 likeBtn.addEventListener("click", () => {
   likesCount++;
   likeBtn.innerText = `👍 ${likesCount}`;
+  setCookie();
   disableButtons();
 });
 
 dislikeBtn.addEventListener("click", () => {
   dislikesCount++;
   dislikeBtn.innerText = `👎 ${dislikesCount}`;
+  setCookie();
   disableButtons();
 });
 
@@ -39,4 +47,9 @@ function disableButtons() {
   likeBtn.disabled = true;
   dislikeBtn.disabled = true;
   submitBtn.disabled = true;
+}
+
+function setCookie() {
+  const expireOn = new Date(Date.now() + 2 * 60 * 1000); // 2 minutes expiration
+  document.cookie = `voted=true; expires=${expireOn.toUTCString()}; path=/`;
 }
