@@ -1,55 +1,59 @@
-let likesCount = 2400;
-let dislikesCount = 120;
+const initLikes= 2400;
+const initDislikes=120;
 
-const likeBtn = document.getElementById("likeBtn");
-const dislikeBtn = document.getElementById("dislikeBtn");
-const commentBox = document.getElementById("commentBox");
-const submitBtn = document.getElementById("submit");
-const clearBtn = document.getElementById("clear");
-const commentsList = document.getElementById("commentsList");
+let likesCount = initLikes;
+let dislikeCount = initDislikes;
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (document.cookie.includes("voted=true")) {
-    disableButtons();
-  }
-});
 
-likeBtn.addEventListener("click", () => {
-  likesCount++;
-  likeBtn.innerText = `👍 ${likesCount}`;
-  setCookie();
-  disableButtons();
-});
+const LikeBtn = document.getElementById("likeBtn");
+const DislikeBtn = document.getElementById("dislikeBtn");
+const commentbox = document.getElementById("commentBox");
+const submitbtn = document.getElementById("submit");
+const clearbtn = document.getElementById("clear");
+const commentList = document.getElementById("commentList")
 
-dislikeBtn.addEventListener("click", () => {
-  dislikesCount++;
-  dislikeBtn.innerText = `👎 ${dislikesCount}`;
-  setCookie();
-  disableButtons();
-});
 
-submitBtn.addEventListener("click", () => {
-  const commentText = commentBox.value.trim();
-  if (commentText !== "") {
-    const commentElement = document.createElement("div");
-    commentElement.classList.add("comment-item");
-    commentElement.innerText = commentText;
-    commentsList.appendChild(commentElement);
-    commentBox.value = "";
-  }
-});
+LikeBtn.innerText = "👍" + likesCount;
+DislikeBtn.innerText="👎" + dislikeCount;
 
-clearBtn.addEventListener("click", () => {
-  commentBox.value = "";
-});
 
-function disableButtons() {
-  likeBtn.disabled = true;
-  dislikeBtn.disabled = true;
-  submitBtn.disabled = true;
+
+LikeBtn.addEventListener("click",()=>{
+    likesCount++;
+    LikeBtn.innerText="👍" + likesCount;
+    setCookie();
+    disableall();
+})
+
+DislikeBtn.addEventListener("click",()=>{
+    dislikeCount++;
+    DislikeBtn.innerText="👎" + dislikeCount;
+    setCookie();
+    disableall();
+})
+
+
+function setCookie(){
+    const expireOn= new Date(Date.now() + 2 *60 *1000)
+    const CookieString = "voted=true; path=/; expires="+ expireOn.toUTCString()
+    document.cookie = CookieString;
+
 }
 
-function setCookie() {
-  const expireOn = new Date(Date.now() + 2 * 60 * 1000); // 2 minutes expiration
-  document.cookie = `voted=true; expires=${expireOn.toUTCString()}; path=/`;
+clearbtn.addEventListener("click", ()=>{
+    commentbox.value = ""
+    const expireOn= new Date(Date.now() - 1)
+    const CookieString = "voted=true; path=/; expires="+ expireOn.toUTCString()
+    document.cookie = CookieString;
+})
+
+function disableall(){
+    LikeBtn.disabled = true;
+    DislikeBtn.disabled=true;
+    submitbtn.disabled=true;
+}
+
+document.addEventListener("DOMContentLoaded",(event)=>{
+if (document.cookie.indexOf("voted")>-1){
+    disableall();
 }
