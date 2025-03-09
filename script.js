@@ -1,5 +1,5 @@
-let likesCount = 100;
-let dislikesCount = 20;
+let likesCount = 2400;
+let dislikesCount = 120;
 
 const likeBtn = document.getElementById("likeBtn");
 const dislikeBtn = document.getElementById("dislikeBtn");
