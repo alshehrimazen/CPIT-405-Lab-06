@@ -3,15 +3,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-h1 {
-  font-size: 30px;
-}
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
 #likeBtn,
 #dislikeBtn {
   font-size: 30px;
@@ -19,13 +10,13 @@ h2 {
   margin: 10px;
   border: none;
   cursor: pointer;
-  background: lightgray;
+  background: rgb(144, 221, 224);
   border-radius: 10px;
 }
 
 #likeBtn:hover,
 #dislikeBtn:hover {
-  background: darkgray;
+  background: rgb(81, 127, 128);
 }
 
 #commentBox {
