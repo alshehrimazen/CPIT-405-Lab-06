@@ -1,5 +1,5 @@
-const initLikes= 2400;
-const initDislikes=120;
+const initLikes = 2400;
+const initDislikes = 120;
 
 let likesCount = initLikes;
 let dislikeCount = initDislikes;
@@ -14,46 +14,47 @@ const commentList = document.getElementById("commentList")
 
 
 LikeBtn.innerText = "👍" + likesCount;
-DislikeBtn.innerText="👎" + dislikeCount;
+DislikeBtn.innerText = "👎" + dislikeCount;
 
 
 
-LikeBtn.addEventListener("click",()=>{
-    likesCount++;
-    LikeBtn.innerText="👍" + likesCount;
-    setCookie();
-    disableall();
+LikeBtn.addEventListener("click", () => {
+  likesCount++;
+  LikeBtn.innerText = "👍" + likesCount;
+  setCookie();
+  disableall();
 })
 
-DislikeBtn.addEventListener("click",()=>{
-    dislikeCount++;
-    DislikeBtn.innerText="👎" + dislikeCount;
-    setCookie();
-    disableall();
+DislikeBtn.addEventListener("click", () => {
+  dislikeCount++;
+  DislikeBtn.innerText = "👎" + dislikeCount;
+  setCookie();
+  disableall();
 })
 
 
-function setCookie(){
-    const expireOn= new Date(Date.now() + 2 *60 *1000)
-    const CookieString = "voted=true; path=/; expires="+ expireOn.toUTCString()
-    document.cookie = CookieString;
+function setCookie() {
+  const expireOn = new Date(Date.now() + 2 * 60 * 1000)
+  const CookieString = "voted=true; path=/; expires=" + expireOn.toUTCString()
+  document.cookie = CookieString;
 
 }
 
-clearbtn.addEventListener("click", ()=>{
-    commentbox.value = ""
-    const expireOn= new Date(Date.now() - 1)
-    const CookieString = "voted=true; path=/; expires="+ expireOn.toUTCString()
-    document.cookie = CookieString;
+clearbtn.addEventListener("click", () => {
+  commentbox.value = ""
+  const expireOn = new Date(Date.now() - 1)
+  const CookieString = "voted=true; path=/; expires=" + expireOn.toUTCString()
+  document.cookie = CookieString;
 })
 
-function disableall(){
-    LikeBtn.disabled = true;
-    DislikeBtn.disabled=true;
-    submitbtn.disabled=true;
+function disableall() {
+  LikeBtn.disabled = true;
+  DislikeBtn.disabled = true;
+  submitbtn.disabled = true;
 }
 
-document.addEventListener("DOMContentLoaded",(event)=>{
-if (document.cookie.indexOf("voted")>-1){
+document.addEventListener("DOMContentLoaded", (event) => {
+  if (document.cookie.indexOf("voted") > -1) {
     disableall();
-}
+  }
+})
